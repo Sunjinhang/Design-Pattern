@@ -1,0 +1,64 @@
+class FactoryPatternDemo
+    {
+        public static void Main(string[] args)
+        {
+            ShapeFactory shapeFactory = new ShapeFactory();
+            Shape shape1 = shapeFactory.getShape("circle");
+            shape1.Draw();
+            Shape shape2 = shapeFactory.getShape("rectangle");
+            shape2.Draw();
+            Shape shape3 = shapeFactory.getShape("square");
+            shape3.Draw();
+            Console.Read();
+        }
+    }
+
+    public interface Shape
+    {
+        void Draw();
+    }
+
+    public class Square : Shape
+    {
+        public void Draw()
+        {
+            Console.WriteLine("Square.method()");
+        }
+    }
+    public class Circle : Shape
+    {
+        public void Draw()
+        {
+            Console.WriteLine("Circle.method()");
+        }
+    }
+    public class Rectangle : Shape
+    {
+        public void Draw()
+        {
+            Console.WriteLine("Rectangle.method()");
+        }
+    }
+
+    public class ShapeFactory
+    {
+        public Shape getShape(string shapeType)
+        {
+            if(shapeType == null)
+            {
+                return null;
+            }
+            else if(shapeType.ToLower() == "square")
+            {
+                return new Square();
+            }
+            else if(shapeType.ToLower() == "rectangle")
+            {
+                return new Rectangle();
+            }
+            else
+            {
+                return new Circle();
+            }
+        }
+    }
