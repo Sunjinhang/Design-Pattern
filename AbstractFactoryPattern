@@ -1,0 +1,92 @@
+class AbstractFactoryPattern
+    {
+        static void Main(string[] args)
+        {
+            Factory fac = new Factory();
+            Shape shape1 = fac.getShape("circle");
+            shape1.Draw();
+
+            Color color1 = fac.getColor("red");
+            color1.Fill();
+            Console.Read();
+
+        }
+    }
+    public interface Shape
+    {
+        void Draw();
+    }
+    public class Rectangle : Shape
+    {
+        public void Draw()
+        {
+            Console.WriteLine("Rectangle.Method()");
+        }
+    }
+
+    public class Square : Shape
+    {
+        public void Draw()
+        {
+            Console.WriteLine("Square.Method()");
+        }
+    }
+
+    public class Circle : Shape
+    {
+        public void Draw()
+        {
+            Console.WriteLine("Circle.Method()");
+        }
+    }
+    public interface Color
+    {
+        void Fill();
+    }
+
+    public class Red : Color
+    {
+        public void Fill()
+        {
+            Console.WriteLine("Red.Method()");
+        }
+    }
+
+    public abstract class AbstractFactory
+    {
+       public abstract Shape getShape(string type);
+
+       public abstract Color getColor(string type);
+
+    }
+
+    public class Factory : AbstractFactory
+    {
+        public override Color getColor(string type)
+        {
+           if(type.ToLower() == "red")
+            {
+                return new Red();
+            }
+             else
+            {
+                return null;
+            }
+        }
+
+        public override Shape getShape(string type)
+        {
+           if(type.ToLower() == "rectangle")
+            {
+                return new Rectangle();
+            }
+           else if(type.ToLower() == "circle")
+            {
+                return new Circle();
+            }
+           else
+            {
+                return new Square();
+            }
+        }
+    }
