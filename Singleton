@@ -1,0 +1,51 @@
+class Singleton
+    {
+        static void Main(string[] args)
+        {
+            LazySingleton lazy = LazySingleton.getInstance();
+            lazy.write();
+
+            HungrySingleton hungry = HungrySingleton.getInstance();
+            hungry.write();
+            Console.Read();
+            
+        }
+    }
+
+    //饿汉式
+    public class HungrySingleton
+    {
+        private static HungrySingleton instance = new HungrySingleton();
+        private HungrySingleton() { }
+        public static HungrySingleton getInstance()
+        {
+            return instance;
+        }
+
+        public void write()
+        {
+            Console.WriteLine("this is HungrySingleton");
+        }
+    }
+
+
+    //懒汉式
+    public class LazySingleton
+    {
+        private static LazySingleton instance;
+        private LazySingleton() { }
+
+        public static LazySingleton getInstance()
+        {
+            if(instance == null)
+            {
+                return new LazySingleton();
+            }
+            return instance;
+        }
+
+        public void write()
+        {
+            Console.WriteLine("this is LazySingleton");
+        }
+    }
